@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Zen.Hexagons</AssemblyName>
+    <RootNamespace>Zen.Hexagons</RootNamespace>
+    <Authors>Greg Moller</Authors>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zen.HexagonsTests", "HexagonsTests\Zen.HexagonsTests.csproj", "{F3B7F995-6312-4398-905F-8246915D1363}"
+	ProjectSection(ProjectDependencies) = postProject
+		{059D41A3-5626-4C89-8933-C8247125725D} = {059D41A3-5626-4C89-8933-C8247125725D}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zen.Hexagons", "Hexagons\Zen.Hexagons.csproj", "{059D41A3-5626-4C89-8933-C8247125725D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3B7F995-6312-4398-905F-8246915D1363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B7F995-6312-4398-905F-8246915D1363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B7F995-6312-4398-905F-8246915D1363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B7F995-6312-4398-905F-8246915D1363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{059D41A3-5626-4C89-8933-C8247125725D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{059D41A3-5626-4C89-8933-C8247125725D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{059D41A3-5626-4C89-8933-C8247125725D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{059D41A3-5626-4C89-8933-C8247125725D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C79C0D61-0AD4-4F43-AC8B-0640139479F7}
+	EndGlobalSection
+EndGlobal
