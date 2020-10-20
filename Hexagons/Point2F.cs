@@ -20,11 +20,6 @@ namespace Zen.Hexagons
         public static Point2F Empty => new Point2F(float.MinValue, float.MinValue);
         public static Point2F Zero => new Point2F(0.0f, 0.0f);
 
-        public Point2I ToPoint()
-        {
-            return new Point2I((X.Round()), Y.Round());
-        }
-
         #region Overrides and Overloads
 
         public override bool Equals(object obj)

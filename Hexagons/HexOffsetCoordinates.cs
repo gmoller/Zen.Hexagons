@@ -14,14 +14,6 @@ namespace Zen.Hexagons
             Row = row;
         }
 
-        public HexOffsetCoordinates(Point2I p)
-        {
-            Col = p.X;
-            Row = p.Y;
-        }
-
-        public Point2I ToPointI() => new Point2I(Col, Row);
-
         #region Overrides and Overloads
 
         public override bool Equals(object obj)

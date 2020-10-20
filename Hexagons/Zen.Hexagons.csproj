@@ -5,6 +5,7 @@
     <AssemblyName>Zen.Hexagons</AssemblyName>
     <RootNamespace>Zen.Hexagons</RootNamespace>
     <Authors>Greg Moller</Authors>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>
