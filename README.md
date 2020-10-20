@@ -10,3 +10,9 @@ To use:
 
     var hexLibrary = new Zen.Hexagons.HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
     var hexCube = hexLibrary.OffsetCoordinatesToCube(new HexOffsetCoordinates(2, 2));
+    
+# Developer
+Written by Greg Moller (greg.moller@gmail.com)
+
+# License
+Licensed under the MIT License. See the LICENCE file for more information.
