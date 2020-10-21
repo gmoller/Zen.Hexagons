@@ -11,15 +11,15 @@ namespace Zen.Hexagons
         float Apothem { get; set; }
         float SideLength { get; set; }
 
-        HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates);
-        HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates);
+        HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates); //
+        HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates); //
         HexOffsetCoordinates CubeToOffsetCoordinates(HexCube hexCube);
         HexAxial CubeToAxial(HexCube hexCube);
         HexOffsetCoordinates AxialToOffsetCoordinates(HexAxial hexAxial);
         HexCube AxialToCube(HexAxial hexAxial);
 
-        HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates hexOffsetCoordinates);
-        HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates hexOffsetCoordinates, Direction direction);
+        HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates hexOffsetCoordinates); //
+        HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates hexOffsetCoordinates, Direction direction); //
         HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offsetCoordinates, int radius);
         HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offsetCoordinates, int radius);
         List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffsetCoordinates, HexOffsetCoordinates toOffsetCoordinates);

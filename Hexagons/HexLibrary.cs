@@ -35,7 +35,9 @@ namespace Zen.Hexagons
         public float SideLength { get; set; }
 
         public HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates) => _hex.OffsetCoordinatesToCube(hexOffsetCoordinates);
-        public HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates) => _hex.OffsetCoordinatesToAxial(offsetCoordinates);
+
+        public HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates) =>
+            _hex.OffsetCoordinatesToAxial(offsetCoordinates);
         public HexOffsetCoordinates CubeToOffsetCoordinates(HexCube hexCube) => _hex.CubeToOffsetCoordinates(hexCube);
         public HexAxial CubeToAxial(HexCube hexCube) => _hex.CubeToAxial(hexCube);
         public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxial hexAxial) => _hex.AxialToOffsetCoordinates(hexAxial);
