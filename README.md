@@ -5,6 +5,8 @@ Can be used for pointy-topped or flat-topped hexes and offset, axial or cube coo
 
 Uses ideas from Amit Patel's brilliant http://www.redblobgames.com/grids/hexagons/.
 
+Nuget package download: https://www.nuget.org/packages/Zen.Hexagons/1.0.1
+
 # Example
 To use:
 
