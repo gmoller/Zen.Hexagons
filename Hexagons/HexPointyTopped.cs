@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Zen.Hexagons
 {
@@ -17,7 +16,7 @@ namespace Zen.Hexagons
             new HexCube( 0, +1, -1), // northwest
         };
 
-        public HexPointyTopped(OffsetCoordinatesType offsetCoordinatesType) : base(offsetCoordinatesType)
+        public HexPointyTopped(OffsetCoordinatesType offsetCoordinatesType, float size) : base(offsetCoordinatesType, HexType.PointyTopped, size)
         {
         }
 
@@ -112,14 +111,14 @@ namespace Zen.Hexagons
             return corners;
         }
 
-        public override int GetHexWidth()
+        protected override float GetWidth()
         {
-            return (int)SideToSide;
+            return SideToSide;
         }
 
-        public override int GetHexHeight()
+        protected override float GetHeight()
         {
-            return (int)VertexToVertex;
+            return VertexToVertex;
         }
 
         public override int GetWorldWidthInPixels(int worldMapColumns)

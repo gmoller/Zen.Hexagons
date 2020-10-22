@@ -9,17 +9,37 @@ namespace Zen.Hexagons
     {
         protected readonly OffsetCoordinatesType OffsetCoordinatesType;
 
-        public HexType HexType { get; set; }
-        public float Size { get; set; }
-        public float VertexToVertex { get; set; }
-        public float SideToSide { get; set; }
-        public float Apothem { get; set; }
-        public float SideLength { get; set; }
+        public HexType HexType { get; }
+        public float Size { get; }
+        public float Width { get; }
+        public float Height { get; }
+        public float Apothem { get; }
+        public float SideToSide { get; }
+        public float Perimeter { get; }
+        public float SideLength { get; }
+        public float CenterToVertex { get; }
+        public float VertexToVertex { get; }
 
-        protected Hex(OffsetCoordinatesType offsetCoordinatesType)
+        protected Hex(OffsetCoordinatesType offsetCoordinatesType, HexType type, float size)
         {
             OffsetCoordinatesType = offsetCoordinatesType;
+            HexType = type;
+
+            Apothem = (float)(Constants.SquareRootOf3 * size * Constants.OneHalf);
+            SideToSide = (float)(Constants.SquareRootOf3 * size);
+            Perimeter = size * 6;
+            SideLength = size;
+            CenterToVertex = size;
+            VertexToVertex = size * 2;
+
+            Size = size;
+            Width = GetWidth();
+            Height = GetHeight();
         }
+
+        protected abstract float GetWidth();
+
+        protected abstract float GetHeight();
 
         public abstract HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates);
 
@@ -294,8 +314,8 @@ namespace Zen.Hexagons
 
         public abstract Point2F[] GetCorners();
 
-        public abstract int GetHexWidth();
-        public abstract int GetHexHeight();
+        //public abstract int GetHexWidth();
+        //public abstract int GetHexHeight();
         public abstract int GetWorldWidthInPixels(int worldMapColumns);
         public abstract int GetWorldHeightInPixels(int worldMapRows);
 

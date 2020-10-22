@@ -4,12 +4,17 @@ namespace Zen.Hexagons
 {
     public interface IHex
     {
-        HexType HexType { get; set; }
-        float Size { get; set; }
-        float VertexToVertex { get; set; }
-        float SideToSide { get; set; }
-        float Apothem { get; set; }
-        float SideLength { get; set; }
+        HexType HexType { get; }
+        float Size { get; }
+        float Width { get; }
+        float Height { get; }
+
+        float Apothem { get; }
+        float SideToSide { get; }
+        float Perimeter { get; }
+        float SideLength { get; }
+        float CenterToVertex { get; }
+        float VertexToVertex { get; }
 
         HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates); //
         HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates); //
@@ -44,8 +49,6 @@ namespace Zen.Hexagons
 
         Point2F[] GetCorners();
 
-        int GetHexWidth();
-        int GetHexHeight();
         int GetWorldWidthInPixels(int worldMapColumns);
         int GetWorldHeightInPixels(int worldMapRows);
     }

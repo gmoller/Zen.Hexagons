@@ -14,25 +14,22 @@ namespace Zen.Hexagons
         {
             _hex = hexType switch
             {
-                HexType.FlatTopped => new HexFlatTopped(offsetCoordinatesType),
-                HexType.PointyTopped => new HexPointyTopped(offsetCoordinatesType),
+                HexType.FlatTopped => new HexFlatTopped(offsetCoordinatesType, hexSize),
+                HexType.PointyTopped => new HexPointyTopped(offsetCoordinatesType, hexSize),
                 _ => throw new ArgumentOutOfRangeException(nameof(hexType), hexType, $"HexType {hexType} is not supported.")
             };
-
-            _hex.HexType = hexType;
-            _hex.Size = hexSize;
-            _hex.VertexToVertex = hexSize * 2;
-            _hex.SideToSide = (float)(Constants.SquareRootOf3 * hexSize);
-            _hex.Apothem = (float)(Constants.SquareRootOf3 * hexSize * Constants.OneHalf);
-            _hex.SideLength = hexSize;
         }
 
-        public HexType HexType { get; set; }
-        public float Size { get; set; }
-        public float VertexToVertex { get; set; }
-        public float SideToSide { get; set; }
-        public float Apothem { get; set; }
-        public float SideLength { get; set; }
+        public HexType HexType => _hex.HexType;
+        public float Size => _hex.Size;
+        public float Width => _hex.Width;
+        public float Height => _hex.Height;
+        public float Apothem => _hex.Apothem;
+        public float SideToSide => _hex.SideToSide;
+        public float Perimeter => _hex.Perimeter;
+        public float SideLength => _hex.SideLength;
+        public float CenterToVertex => _hex.CenterToVertex;
+        public float VertexToVertex => _hex.VertexToVertex;
 
         public HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates) => _hex.OffsetCoordinatesToCube(hexOffsetCoordinates);
         public HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates) => _hex.OffsetCoordinatesToAxial(offsetCoordinates);
@@ -66,8 +63,6 @@ namespace Zen.Hexagons
         public Point3F Lerp(HexCube a, HexCube b, float t) => _hex.Lerp(a, b, t);
 
         public Point2F[] GetCorners() => _hex.GetCorners();
-        public int GetHexWidth() => _hex.GetHexWidth();
-        public int GetHexHeight() => _hex.GetHexHeight();
         public int GetWorldWidthInPixels(int worldMapColumns) => _hex.GetWorldWidthInPixels(worldMapColumns);
         public int GetWorldHeightInPixels(int worldMapRows) => _hex.GetWorldHeightInPixels(worldMapRows);
     }
