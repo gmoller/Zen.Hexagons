@@ -90,11 +90,12 @@ namespace Zen.Hexagons
             var ring = new List<HexOffsetCoordinates>();
 
             var cube = OffsetCoordinatesToCube(offsetCoordinates);
-            var westNeighbor = GetNeighboringCube(Direction.SouthWest);//west
-            var scaledCube = westNeighbor * radius;
+            var southWestNeighbor = GetNeighboringCube(Direction.SouthWest);
+            var scaledCube = southWestNeighbor * radius;
             cube += scaledCube;
 
-            for (var i = 0; i < 8; i++)
+            var directions = GetRingDirections();
+            foreach (var direction in directions)
             {
                 for (var j = 0; j < radius; j++)
                 {
@@ -103,13 +104,15 @@ namespace Zen.Hexagons
                     {
                         ring.Add(offset);
                     }
-                    cube = GetNeighbor(cube, (Direction)i);
+                    cube = GetNeighbor(cube, direction);
                 }
             }
             var singleRing = ring.ToArray();
 
             return singleRing;
         }
+
+        protected abstract Direction[] GetRingDirections();
 
         public HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offsetCoordinates, int radius)
         {

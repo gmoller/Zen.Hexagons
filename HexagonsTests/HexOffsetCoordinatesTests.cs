@@ -70,7 +70,7 @@ namespace Zen.HexagonsTests
         }
 
         [Test]
-        public void GetAllNeighbor_OddQ()
+        public void GetNeighbor_OddQ()
         {
             var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
 
@@ -90,7 +90,7 @@ namespace Zen.HexagonsTests
         }
 
         [Test]
-        public void GetAllNeighbor_EvenQ()
+        public void GetNeighbor_EvenQ()
         {
             var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
 
@@ -110,7 +110,7 @@ namespace Zen.HexagonsTests
         }
 
         [Test]
-        public void GetAllNeighbor_OddR()
+        public void GetNeighbor_OddR()
         {
             var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
 
@@ -130,7 +130,7 @@ namespace Zen.HexagonsTests
         }
 
         [Test]
-        public void GetAllNeighbor_EvenR()
+        public void GetNeighbor_EvenR()
         {
             var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
 
@@ -147,6 +147,134 @@ namespace Zen.HexagonsTests
             Assert.AreEqual(new HexOffsetCoordinates(0, 2), neighborSW);
             Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighborW);
             Assert.AreEqual(new HexOffsetCoordinates(0, 0), neighborNW);
+        }
+
+        [Test]
+        public void GetSingleRing_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
+
+            Assert.AreEqual(6, ring1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), ring1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), ring1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), ring1[5]);
+
+            var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+
+            Assert.AreEqual(12, ring2.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 3), ring2[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring2[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring2[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring2[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring2[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 0), ring2[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 1), ring2[6]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 2), ring2[7]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 3), ring2[8]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 3), ring2[9]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 4), ring2[10]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 3), ring2[11]);
+        }
+
+        [Test]
+        public void GetSingleRing_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
+
+            Assert.AreEqual(6, ring1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), ring1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), ring1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), ring1[5]);
+
+            var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+
+            Assert.AreEqual(12, ring2.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 3), ring2[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring2[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring2[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), ring2[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring2[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 1), ring2[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 1), ring2[6]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 2), ring2[7]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 3), ring2[8]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), ring2[9]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 4), ring2[10]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 4), ring2[11]);
+        }
+
+        [Test]
+        public void GetSingleRing_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
+
+            Assert.AreEqual(6, ring1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), ring1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), ring1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), ring1[5]);
+
+            var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+
+            Assert.AreEqual(12, ring2.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 4), ring2[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 3), ring2[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring2[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring2[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring2[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring2[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 0), ring2[6]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 1), ring2[7]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 2), ring2[8]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 3), ring2[9]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), ring2[10]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 4), ring2[11]);
+        }
+
+        [Test]
+        public void GetSingleRing_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
+
+            Assert.AreEqual(6, ring1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), ring1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), ring1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), ring1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), ring1[5]);
+
+            var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+
+            Assert.AreEqual(12, ring2.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 4), ring2[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 3), ring2[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), ring2[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), ring2[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), ring2[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), ring2[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 0), ring2[6]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 1), ring2[7]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 2), ring2[8]);
+            Assert.AreEqual(new HexOffsetCoordinates(4, 3), ring2[9]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), ring2[10]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 4), ring2[11]);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Zen.Hexagons
 {
@@ -166,6 +167,13 @@ namespace Zen.Hexagons
             }
 
             return degrees;
+        }
+
+        protected override Direction[] GetRingDirections()
+        {
+            var directions = new [] { Direction.NorthWest, Direction.NorthEast, Direction.East, Direction.SouthEast, Direction.SouthWest, Direction.West };
+
+            return directions;
         }
     }
 }

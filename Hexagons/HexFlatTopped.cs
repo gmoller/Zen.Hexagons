@@ -167,5 +167,12 @@ namespace Zen.Hexagons
 
             return degrees;
         }
+
+        protected override Direction[] GetRingDirections()
+        {
+            var directions = new [] { Direction.North, Direction.NorthEast, Direction.SouthEast, Direction.South, Direction.SouthWest, Direction.NorthWest };
+
+            return directions;
+        }
     }
 }
