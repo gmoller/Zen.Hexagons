@@ -18,6 +18,9 @@ To use:
     var neighbors = hexLibrary.GetAllNeighbors(new HexOffsetCoordinates(1, 1));
     var neighborNW = hexLibrary.GetNeighbor(new HexOffsetCoordinates(1, 1), Direction.NorthWest);
     
+    var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
+    var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+    
 # Developer
 Written by Greg Moller (greg.moller@gmail.com)
 
