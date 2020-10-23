@@ -3,12 +3,12 @@
 namespace Zen.Hexagons
 {
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    public readonly struct HexAxial
+    public readonly struct HexAxialCoordinates
     {
         public int Q { get; }
         public int R { get; }
 
-        public HexAxial(int q, int r)
+        public HexAxialCoordinates(int q, int r)
         {
             Q = q;
             R = r;
@@ -18,15 +18,15 @@ namespace Zen.Hexagons
 
         public override bool Equals(object obj)
         {
-            return obj is HexAxial axial && this == axial;
+            return obj is HexAxialCoordinates axial && this == axial;
         }
 
-        public static bool operator == (HexAxial a, HexAxial b)
+        public static bool operator == (HexAxialCoordinates a, HexAxialCoordinates b)
         {
             return a.Q == b.Q && a.R == b.R;
         }
 
-        public static bool operator != (HexAxial a, HexAxial b)
+        public static bool operator != (HexAxialCoordinates a, HexAxialCoordinates b)
         {
             return !(a == b);
         }

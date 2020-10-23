@@ -20,19 +20,19 @@ namespace Zen.Hexagons
         public float CenterToVertex { get; }
         public float VertexToVertex { get; }
 
-        protected Hex(OffsetCoordinatesType offsetCoordinatesType, HexType type, float size)
+        protected Hex(HexType hexType, OffsetCoordinatesType offsetCoordinatesType, float hexSize)
         {
             OffsetCoordinatesType = offsetCoordinatesType;
-            HexType = type;
+            HexType = hexType;
 
-            Apothem = (float)(Constants.SquareRootOf3 * size * Constants.OneHalf);
-            SideToSide = (float)(Constants.SquareRootOf3 * size);
-            Perimeter = size * 6;
-            SideLength = size;
-            CenterToVertex = size;
-            VertexToVertex = size * 2;
+            Apothem = (float)(Constants.SquareRootOf3 * hexSize * Constants.OneHalf);
+            SideToSide = (float)(Constants.SquareRootOf3 * hexSize);
+            Perimeter = hexSize * 6;
+            SideLength = hexSize;
+            CenterToVertex = hexSize;
+            VertexToVertex = hexSize * 2;
 
-            Size = size;
+            Size = hexSize;
             Width = GetWidth();
             Height = GetHeight();
         }
@@ -41,48 +41,48 @@ namespace Zen.Hexagons
 
         protected abstract float GetHeight();
 
-        public abstract HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates);
+        public abstract HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset);
 
-        public HexAxial OffsetCoordinatesToAxial(HexOffsetCoordinates offsetCoordinates)
+        public HexAxialCoordinates OffsetCoordinatesToAxial(HexOffsetCoordinates offset)
         {
-            var cube = OffsetCoordinatesToCube(offsetCoordinates);
+            var cube = OffsetCoordinatesToCube(offset);
             var axial = CubeToAxial(cube);
 
             return axial;
         }
 
-        public abstract HexOffsetCoordinates CubeToOffsetCoordinates(HexCube hexCube);
+        public abstract HexOffsetCoordinates CubeToOffsetCoordinates(HexCubeCoordinates cube);
 
-        public HexAxial CubeToAxial(HexCube hexCube)
+        public HexAxialCoordinates CubeToAxial(HexCubeCoordinates cube)
         {
-            var q = hexCube.X;
-            var r = hexCube.Z;
-            var axial = new HexAxial(q, r);
+            var q = cube.X;
+            var r = cube.Z;
+            var axial = new HexAxialCoordinates(q, r);
 
             return axial;
         }
 
-        public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxial hexAxial)
+        public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial)
         {
-            var cube = AxialToCube(hexAxial);
+            var cube = AxialToCube(axial);
             var offsetCoordinates = CubeToOffsetCoordinates(cube);
 
             return offsetCoordinates;
         }
 
-        public HexCube AxialToCube(HexAxial hexAxial)
+        public HexCubeCoordinates AxialToCube(HexAxialCoordinates axial)
         {
-            var x = hexAxial.Q;
-            var z = hexAxial.R;
+            var x = axial.Q;
+            var z = axial.R;
             var y = -x - z;
-            var cube = new HexCube(x, y, z);
+            var cube = new HexCubeCoordinates(x, y, z);
 
             return cube;
         }
 
-        public HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates hexOffsetCoordinates)
+        public HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates offset)
         {
-            var cube = OffsetCoordinatesToCube(hexOffsetCoordinates);
+            var cube = OffsetCoordinatesToCube(offset);
             var allNeighboringCubes = GetAllNeighbors(cube);
 
             var neighbors = new HexOffsetCoordinates[6];
@@ -96,20 +96,20 @@ namespace Zen.Hexagons
             return neighbors;
         }
 
-        public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates hexOffsetCoordinates, Direction direction)
+        public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction)
         {
-            var cube = OffsetCoordinatesToCube(hexOffsetCoordinates);
+            var cube = OffsetCoordinatesToCube(offset);
             var neighbor = GetNeighbor(cube, direction);
-            var offsetCoordinates = CubeToOffsetCoordinates(neighbor);
+            var returnOffset = CubeToOffsetCoordinates(neighbor);
 
-            return offsetCoordinates;
+            return returnOffset;
         }
 
-        public HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offsetCoordinates, int radius)
+        public HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offset, int radius)
         {
             var ring = new List<HexOffsetCoordinates>();
 
-            var cube = OffsetCoordinatesToCube(offsetCoordinates);
+            var cube = OffsetCoordinatesToCube(offset);
             var southWestNeighbor = GetNeighboringCube(Direction.SouthWest);
             var scaledCube = southWestNeighbor * radius;
             cube += scaledCube;
@@ -119,10 +119,10 @@ namespace Zen.Hexagons
             {
                 for (var j = 0; j < radius; j++)
                 {
-                    var offset = CubeToOffsetCoordinates(cube);
-                    if (!ring.Contains(offset))
+                    var returnOffset = CubeToOffsetCoordinates(cube);
+                    if (!ring.Contains(returnOffset))
                     {
-                        ring.Add(offset);
+                        ring.Add(returnOffset);
                     }
                     cube = GetNeighbor(cube, direction);
                 }
@@ -134,13 +134,13 @@ namespace Zen.Hexagons
 
         protected abstract Direction[] GetRingDirections();
 
-        public HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offsetCoordinates, int radius)
+        public HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offset, int radius)
         {
-            var ring = new List<HexOffsetCoordinates> { offsetCoordinates };
+            var ring = new List<HexOffsetCoordinates> { offset };
 
             for (var k = 1; k <= radius; k++)
             {
-                var singleRing = GetSingleRing(offsetCoordinates, k);
+                var singleRing = GetSingleRing(offset, k);
                 ring.AddRange(singleRing.ToList());
             }
             var spiralRing = ring.ToArray();
@@ -148,10 +148,10 @@ namespace Zen.Hexagons
             return spiralRing;
         }
 
-        public List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffsetCoordinates, HexOffsetCoordinates toOffsetCoordinates)
+        public List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
         {
-            var fromCube = OffsetCoordinatesToCube(fromOffsetCoordinates);
-            var toCube = OffsetCoordinatesToCube(toOffsetCoordinates);
+            var fromCube = OffsetCoordinatesToCube(fromOffset);
+            var toCube = OffsetCoordinatesToCube(toOffset);
 
             var hexes = GetLine(fromCube, toCube);
 
@@ -165,10 +165,10 @@ namespace Zen.Hexagons
             return result;
         }
 
-        public int GetDistance(HexOffsetCoordinates from, HexOffsetCoordinates to)
+        public int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
         {
-            var fromCube = OffsetCoordinatesToCube(from);
-            var toCube = OffsetCoordinatesToCube(to);
+            var fromCube = OffsetCoordinatesToCube(fromOffset);
+            var toCube = OffsetCoordinatesToCube(toOffset);
 
             var distance = GetDistance(fromCube, toCube);
 
@@ -183,7 +183,7 @@ namespace Zen.Hexagons
             return offsetCoordinates2;
         }
 
-        public abstract Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offsetCoordinates);
+        public abstract Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset);
 
         public HexOffsetCoordinates RoundOffsetCoordinates(float x, float y)
         {
@@ -193,13 +193,13 @@ namespace Zen.Hexagons
             return offsetCoordinates;
         }
 
-        public HexCube[] GetAllNeighbors(HexCube hexCube)
+        public HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube)
         {
-            var neighbors = new List<HexCube>();
+            var neighbors = new List<HexCubeCoordinates>();
             for (var i = 0; i < 8; i++)
             {
-                var neighbor = GetNeighbor(hexCube, (Direction)i);
-                if (neighbor != hexCube)
+                var neighbor = GetNeighbor(cube, (Direction)i);
+                if (neighbor != cube)
                 {
                     neighbors.Add(neighbor);
                 }
@@ -208,19 +208,19 @@ namespace Zen.Hexagons
             return neighbors.ToArray();
         }
 
-        public HexCube GetNeighbor(HexCube hexCube, Direction direction)
+        public HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction)
         {
             var offset = GetNeighboringCube(direction);
-            var neighbor = hexCube + offset;
+            var neighbor = cube + offset;
 
             return neighbor;
         }
 
-        public List<HexCube> GetLine(HexCube fromCube, HexCube toCube)
+        public List<HexCubeCoordinates> GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube)
         {
             var distance = GetDistance(fromCube, toCube);
 
-            var results = new List<HexCube>();
+            var results = new List<HexCubeCoordinates>();
             for (var i = 0; i <= distance; i++)
             {
                 var t = 1.0f / distance * i;
@@ -232,7 +232,7 @@ namespace Zen.Hexagons
             return results;
         }
 
-        public int GetDistance(HexCube fromCube, HexCube toCube)
+        public int GetDistance(HexCubeCoordinates fromCube, HexCubeCoordinates toCube)
         {
             var diffX = Math.Abs(fromCube.X - toCube.X);
             var diffY = Math.Abs(fromCube.Y - toCube.Y);
@@ -245,7 +245,7 @@ namespace Zen.Hexagons
             return distance1;
         }
 
-        public HexCube FromPixelToCube(int x, int y)
+        public HexCubeCoordinates FromPixelToCube(int x, int y)
         {
             var axial = FromPixelToAxial(x, y);
             var cube = AxialToCube(axial);
@@ -253,7 +253,7 @@ namespace Zen.Hexagons
             return cube;
         }
 
-        public Point2F FromCubeToPixel(HexCube cube)
+        public Point2F FromCubeToPixel(HexCubeCoordinates cube)
         {
             var axial = CubeToAxial(cube);
             var pixel = FromAxialToPixel(axial);
@@ -261,7 +261,7 @@ namespace Zen.Hexagons
             return pixel;
         }
 
-        public HexCube RoundCube(float x, float y, float z)
+        public HexCubeCoordinates RoundCube(float x, float y, float z)
         {
             var rx = (int)Math.Round(x);
             var ry = (int)Math.Round(y);
@@ -285,16 +285,16 @@ namespace Zen.Hexagons
             {
                 rz = -rx - ry;
             }
-            var cube = new HexCube(rx, ry, rz);
+            var cube = new HexCubeCoordinates(rx, ry, rz);
 
             return cube;
         }
 
-        public abstract HexAxial FromPixelToAxial(int x, int y);
+        public abstract HexAxialCoordinates FromPixelToAxial(int x, int y);
 
-        public abstract Point2F FromAxialToPixel(HexAxial axial);
+        public abstract Point2F FromAxialToPixel(HexAxialCoordinates axial);
 
-        public HexAxial RoundAxial(float q, float r)
+        public HexAxialCoordinates RoundAxial(float q, float r)
         {
             var cube = RoundCube(q, -q - r, r);
             var axial = CubeToAxial(cube);
@@ -302,11 +302,11 @@ namespace Zen.Hexagons
             return axial;
         }
 
-        public Point3F Lerp(HexCube a, HexCube b, float t)
+        public Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t)
         {
-            var x = t.Lerp(a.X, b.X);
-            var y = t.Lerp(a.Y, b.Y);
-            var z = t.Lerp(a.Z, b.Z);
+            var x = t.Lerp(fromCube.X, toCube.X);
+            var y = t.Lerp(fromCube.Y, toCube.Y);
+            var z = t.Lerp(fromCube.Z, toCube.Z);
             var foo = new Point3F(x, y, z);
 
             return foo;
@@ -314,12 +314,10 @@ namespace Zen.Hexagons
 
         public abstract Point2F[] GetCorners();
 
-        //public abstract int GetHexWidth();
-        //public abstract int GetHexHeight();
         public abstract int GetWorldWidthInPixels(int worldMapColumns);
         public abstract int GetWorldHeightInPixels(int worldMapRows);
 
-        protected abstract HexCube GetNeighboringCube(Direction direction);
+        protected abstract HexCubeCoordinates GetNeighboringCube(Direction direction);
 
         protected Point2F GetCorner(Direction direction)
         {

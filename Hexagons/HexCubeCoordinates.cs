@@ -3,36 +3,36 @@
 namespace Zen.Hexagons
 {
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    public readonly struct HexCube
+    public readonly struct HexCubeCoordinates
     {
         public int X { get; }
         public int Y { get; }
         public int Z { get; }
 
-        public HexCube(int x, int y, int z)
+        public HexCubeCoordinates(int x, int y, int z)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
-        public static HexCube operator + (HexCube a, HexCube b)
+        public static HexCubeCoordinates operator + (HexCubeCoordinates a, HexCubeCoordinates b)
         {
-            var hexCube = new HexCube(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+            var hexCube = new HexCubeCoordinates(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
 
             return hexCube;
         }
 
-        public static HexCube operator * (HexCube a, int k)
+        public static HexCubeCoordinates operator * (HexCubeCoordinates a, int k)
         {
             var hexCube = a.Scale(k);
 
             return hexCube;
         }
 
-        public HexCube Scale(int k)
+        public HexCubeCoordinates Scale(int k)
         {
-            var scaledCube = new HexCube(X * k, Y * k, Z * k);
+            var scaledCube = new HexCubeCoordinates(X * k, Y * k, Z * k);
 
             return scaledCube;
         }
@@ -41,15 +41,15 @@ namespace Zen.Hexagons
 
         public override bool Equals(object obj)
         {
-            return obj is HexCube cube && this == cube;
+            return obj is HexCubeCoordinates cube && this == cube;
         }
 
-        public static bool operator == (HexCube a, HexCube b)
+        public static bool operator == (HexCubeCoordinates a, HexCubeCoordinates b)
         {
             return a.X == b.X && a.Y == b.Y && a.Z == b.Z;
         }
 
-        public static bool operator != (HexCube a, HexCube b)
+        public static bool operator != (HexCubeCoordinates a, HexCubeCoordinates b)
         {
             return !(a == b);
         }

@@ -4,24 +4,24 @@ namespace Zen.Hexagons
 {
     public class HexPointyTopped : Hex
     {
-        private static readonly HexCube[] Directions =
+        private static readonly HexCubeCoordinates[] Directions =
         {
-            new HexCube( 0,  0,  0), // north
-            new HexCube(+1,  0, -1), // northeast
-            new HexCube(+1, -1,  0), // east
-            new HexCube( 0, -1, +1), // southeast
-            new HexCube( 0,  0,  0), // south
-            new HexCube(-1,  0, +1), // southwest
-            new HexCube(-1, +1,  0), // west
-            new HexCube( 0, +1, -1), // northwest
+            new HexCubeCoordinates( 0,  0,  0), // north
+            new HexCubeCoordinates(+1,  0, -1), // northeast
+            new HexCubeCoordinates(+1, -1,  0), // east
+            new HexCubeCoordinates( 0, -1, +1), // southeast
+            new HexCubeCoordinates( 0,  0,  0), // south
+            new HexCubeCoordinates(-1,  0, +1), // southwest
+            new HexCubeCoordinates(-1, +1,  0), // west
+            new HexCubeCoordinates( 0, +1, -1), // northwest
         };
 
-        public HexPointyTopped(OffsetCoordinatesType offsetCoordinatesType, float size) : base(offsetCoordinatesType, HexType.PointyTopped, size)
+        public HexPointyTopped(OffsetCoordinatesType offsetCoordinatesType, float hexSize) : base(HexType.PointyTopped, offsetCoordinatesType, hexSize)
         {
         }
 
 
-        protected override HexCube GetNeighboringCube(Direction direction)
+        protected override HexCubeCoordinates GetNeighboringCube(Direction direction)
         {
             var neighboringCube = Directions[(int)direction];
 
@@ -29,10 +29,10 @@ namespace Zen.Hexagons
         }
 
 
-        public override HexCube OffsetCoordinatesToCube(HexOffsetCoordinates hexOffsetCoordinates)
+        public override HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset)
         {
-            var col = hexOffsetCoordinates.Col;
-            var row = hexOffsetCoordinates.Row;
+            var col = offset.Col;
+            var row = offset.Row;
 
             col -= OffsetCoordinatesType switch
             {
@@ -41,15 +41,15 @@ namespace Zen.Hexagons
                 _ => throw new ArgumentOutOfRangeException(nameof(OffsetCoordinatesType), OffsetCoordinatesType, $"OffsetCoordinatesType {OffsetCoordinatesType} is not supported.")
             };
             var y = -col - row;
-            var cube = new HexCube(col, y, row);
+            var cube = new HexCubeCoordinates(col, y, row);
 
             return cube;
         }
 
-        public override HexOffsetCoordinates CubeToOffsetCoordinates(HexCube hexCube)
+        public override HexOffsetCoordinates CubeToOffsetCoordinates(HexCubeCoordinates cube)
         {
-            var col = hexCube.X;
-            var row = hexCube.Z;
+            var col = cube.X;
+            var row = cube.Z;
 
             col += OffsetCoordinatesType switch
             {
@@ -63,15 +63,15 @@ namespace Zen.Hexagons
             return offsetCoordinates;
         }
 
-        public override Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offsetCoordinates)
+        public override Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset)
         {
             var x = Size;
-            var y = Size * (1.5f * offsetCoordinates.Row);
+            var y = Size * (1.5f * offset.Row);
 
             x *= OffsetCoordinatesType switch
             {
-                OffsetCoordinatesType.Even => (float)(Constants.SquareRootOf3 * (offsetCoordinates.Col - 0.5f * (offsetCoordinates.Row & 1))),
-                OffsetCoordinatesType.Odd => (float)(Constants.SquareRootOf3 * (offsetCoordinates.Col + 0.5f * (offsetCoordinates.Row & 1))),
+                OffsetCoordinatesType.Even => (float)(Constants.SquareRootOf3 * (offset.Col - 0.5f * (offset.Row & 1))),
+                OffsetCoordinatesType.Odd => (float)(Constants.SquareRootOf3 * (offset.Col + 0.5f * (offset.Row & 1))),
                 _ => throw new ArgumentOutOfRangeException(nameof(OffsetCoordinatesType), OffsetCoordinatesType, $"OffsetCoordinatesType {OffsetCoordinatesType} is not supported.")
             };
 
@@ -80,7 +80,7 @@ namespace Zen.Hexagons
             return pixel;
         }
 
-        public override HexAxial FromPixelToAxial(int x, int y)
+        public override HexAxialCoordinates FromPixelToAxial(int x, int y)
         {
             var q = (float)((Constants.OneThirdOfSquareRootOf3 * x - Constants.OneThird * y) / Size);
             var r = (float)(Constants.TwoThirds * y / Size);
@@ -89,7 +89,7 @@ namespace Zen.Hexagons
             return axial;
         }
 
-        public override Point2F FromAxialToPixel(HexAxial axial)
+        public override Point2F FromAxialToPixel(HexAxialCoordinates axial)
         {
             var x = (float)(Size * (Constants.SquareRootOf3 * axial.Q + Constants.HalfOfSquareRootOf3 * axial.R));
             var y = Size * (1.5f * axial.R);
