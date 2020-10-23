@@ -21,6 +21,8 @@ To use:
     var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
     var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
     
+    var ring3 = hexLibrary.GetSpiralRing(new HexOffsetCoordinates(2, 2), 2);
+    
 # Developer
 Written by Greg Moller (greg.moller@gmail.com)
 
