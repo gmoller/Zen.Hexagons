@@ -5,7 +5,7 @@ Can be used for pointy-topped or flat-topped hexes and offset, axial or cube coo
 
 Uses ideas from Amit Patel's brilliant http://www.redblobgames.com/grids/hexagons/.
 
-Nuget package download: https://www.nuget.org/packages/Zen.Hexagons/1.0.3
+Nuget package download: https://www.nuget.org/packages/Zen.Hexagons/1.0.4
 
 # Example
 To use:
@@ -20,6 +20,8 @@ To use:
     
     var ring1 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(1, 1), 1);
     var ring2 = hexLibrary.GetSingleRing(new HexOffsetCoordinates(2, 2), 2);
+    
+    var ring3 = hexLibrary.GetSpiralRing(new HexOffsetCoordinates(2, 2), 2);
     
 # Developer
 Written by Greg Moller (greg.moller@gmail.com)
