@@ -7,7 +7,8 @@ namespace Zen.Hexagons
 {
     public abstract class Hex : IHex
     {
-        protected readonly OffsetCoordinatesType OffsetCoordinatesType;
+        protected OffsetCoordinatesType OffsetCoordinatesType { get; }
+        protected Point2F Offset { get; }
 
         public HexType HexType { get; }
         public float Size { get; }
@@ -20,7 +21,7 @@ namespace Zen.Hexagons
         public float CenterToVertex { get; }
         public float VertexToVertex { get; }
 
-        protected Hex(HexType hexType, OffsetCoordinatesType offsetCoordinatesType, float hexSize)
+        protected Hex(HexType hexType, OffsetCoordinatesType offsetCoordinatesType, float hexSize, bool align00With00)
         {
             OffsetCoordinatesType = offsetCoordinatesType;
             HexType = hexType;
@@ -35,11 +36,15 @@ namespace Zen.Hexagons
             Size = hexSize;
             Width = GetWidth();
             Height = GetHeight();
+
+            Offset = align00With00 ? Point2F.Zero : DetermineOffset();
         }
 
         protected abstract float GetWidth();
 
         protected abstract float GetHeight();
+
+        protected abstract Point2F DetermineOffset();
 
         public abstract HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset);
 
@@ -148,21 +153,22 @@ namespace Zen.Hexagons
             return spiralRing;
         }
 
-        public List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
+        public HexOffsetCoordinates[] GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
         {
             var fromCube = OffsetCoordinatesToCube(fromOffset);
             var toCube = OffsetCoordinatesToCube(toOffset);
 
             var hexes = GetLine(fromCube, toCube);
 
-            var result = new List<HexOffsetCoordinates>();
-            foreach (var hex in hexes)
+            var results = new HexOffsetCoordinates[hexes.Length];
+            for (var i = 0; i < hexes.Length; i++)
             {
+                var hex = hexes[i];
                 var offsetCoordinates = CubeToOffsetCoordinates(hex);
-                result.Add(offsetCoordinates);
+                results[i] = offsetCoordinates;
             }
 
-            return result;
+            return results;
         }
 
         public int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
@@ -175,15 +181,15 @@ namespace Zen.Hexagons
             return distance;
         }
 
+        public abstract Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset);
+
         public HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y)
         {
-            var cube = FromPixelToCube(x, y);
-            var offsetCoordinates2 = CubeToOffsetCoordinates(cube);
+            var cube = FromPixelToCube(x - (int)Offset.X, y - (int)Offset.Y);
+            var offset = CubeToOffsetCoordinates(cube);
 
-            return offsetCoordinates2;
+            return offset;
         }
-
-        public abstract Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset);
 
         public HexOffsetCoordinates RoundOffsetCoordinates(float x, float y)
         {
@@ -216,17 +222,17 @@ namespace Zen.Hexagons
             return neighbor;
         }
 
-        public List<HexCubeCoordinates> GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube)
+        public HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube)
         {
             var distance = GetDistance(fromCube, toCube);
 
-            var results = new List<HexCubeCoordinates>();
+            var results = new HexCubeCoordinates[distance + 1];
             for (var i = 0; i <= distance; i++)
             {
                 var t = 1.0f / distance * i;
                 var lerp = Lerp(fromCube, toCube, t);
                 var hex = RoundCube(lerp.X, lerp.Y, lerp.Z);
-                results.Add(hex);
+                results[i] = hex;
             }
 
             return results;
@@ -323,9 +329,9 @@ namespace Zen.Hexagons
         {
             var degrees = GetDegreesForHexCorner(direction);
             var radians = degrees.ToRadians();
-            var v = new Point2F((float)(Size * Math.Cos(radians)), (float)(Size * Math.Sin(radians)));
+            var p = new Point2F((float)(Size * Math.Cos(radians)), (float)(Size * Math.Sin(radians)));
 
-            return v;
+            return p;
         }
 
         protected abstract float GetDegreesForHexCorner(Direction direction);

@@ -32,9 +32,29 @@ namespace Zen.Hexagons
             return a.X.AboutEquals(b.X) && a.Y.AboutEquals(b.Y);
         }
 
-        public static bool operator !=(Point2F a, Point2F b)
+        public static bool operator != (Point2F a, Point2F b)
         {
             return !(a == b);
+        }
+
+        public static Point2F operator + (Point2F a, Point2F b)
+        {
+            return new Point2F(a.X + b.X, a.Y + b.Y);
+        }
+
+        public static Point2F operator - (Point2F a, Point2F b)
+        {
+            return new Point2F(a.X - b.X, a.Y - b.Y);
+        }
+
+        public static Point2F operator * (Point2F a, Point2F b)
+        {
+            return new Point2F(a.X * b.X, a.Y * b.Y);
+        }
+
+        public static Point2F operator * (Point2F a, int scalar)
+        {
+            return new Point2F(a.X * scalar, a.Y * scalar);
         }
 
         public override int GetHashCode()

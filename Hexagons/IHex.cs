@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Zen.Hexagons
+﻿namespace Zen.Hexagons
 {
     public interface IHex
     {
@@ -27,25 +25,34 @@ namespace Zen.Hexagons
         HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction); //
         HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offset, int radius); //
         HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offset, int radius); //
-        List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset);
-        int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset);
-        HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y);
-        Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset);
-        HexOffsetCoordinates RoundOffsetCoordinates(float x, float y);
+        HexOffsetCoordinates[] GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset); //
+        int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset); //
+        Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset); //
+        HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y); //
+        HexOffsetCoordinates RoundOffsetCoordinates(float x, float y); //
+        //Point3F Lerp(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset, float t);
 
         HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube);
         HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction);
-        List<HexCubeCoordinates> GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube);
+        //HexCubeCoordinates[] GetSingleRing(HexCubeCoordinates offset, int radius);
+        //HexCubeCoordinates[] GetSpiralRing(HexCubeCoordinates offset, int radius);
+        HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube);
         int GetDistance(HexCubeCoordinates fromCube, HexCubeCoordinates toCube);
         HexCubeCoordinates FromPixelToCube(int x, int y);
         Point2F FromCubeToPixel(HexCubeCoordinates cube);
         HexCubeCoordinates RoundCube(float x, float y, float z);
+        Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t);
 
+        //HexAxialCoordinates[] GetAllNeighbors(HexAxialCoordinates offset);
+        //HexAxialCoordinates GetNeighbor(HexAxialCoordinates offset, Direction direction);
+        //HexAxialCoordinates[] GetSingleRing(HexAxialCoordinates offset, int radius);
+        //HexAxialCoordinates[] GetSpiralRing(HexAxialCoordinates offset, int radius);
+        //HexAxialCoordinates[] GetLine(HexAxialCoordinates fromOffset, HexAxialCoordinates toOffset);
+        //int GetDistance(HexAxialCoordinates fromOffset, HexAxialCoordinates toOffset);
         HexAxialCoordinates FromPixelToAxial(int x, int y);
         Point2F FromAxialToPixel(HexAxialCoordinates axial);
         HexAxialCoordinates RoundAxial(float q, float r);
-
-        Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t);
+        //Point3F Lerp(HexAxialCoordinates fromAxial, HexAxialCoordinates toAxial, float t);
 
         Point2F[] GetCorners();
 

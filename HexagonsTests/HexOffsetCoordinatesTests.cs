@@ -392,5 +392,395 @@ namespace Zen.HexagonsTests
             Assert.AreEqual(new HexOffsetCoordinates(3, 4), ring1[17]);
             Assert.AreEqual(new HexOffsetCoordinates(2, 4), ring1[18]);
         }
+
+        [Test]
+        public void GetLine_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var line1 = hexLibrary.GetLine(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(6, line1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), line1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), line1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), line1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 3), line1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 3), line1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), line1[5]);
+        }
+
+        [Test]
+        public void GetLine_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var line1 = hexLibrary.GetLine(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(6, line1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), line1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), line1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), line1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), line1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 3), line1[4]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), line1[5]);
+        }
+
+        [Test]
+        public void GetLine_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var line1 = hexLibrary.GetLine(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(5, line1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), line1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), line1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), line1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 3), line1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), line1[4]);
+        }
+
+        [Test]
+        public void GetLine_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var line1 = hexLibrary.GetLine(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(5, line1.Length);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), line1[0]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), line1[1]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), line1[2]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 3), line1[3]);
+            Assert.AreEqual(new HexOffsetCoordinates(3, 4), line1[4]);
+        }
+
+        [Test]
+        public void GetDistance_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var distance = hexLibrary.GetDistance(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(5, distance);
+        }
+
+        [Test]
+        public void GetDistance_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var distance = hexLibrary.GetDistance(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(5, distance);
+        }
+
+        [Test]
+        public void GetDistance_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var distance = hexLibrary.GetDistance(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(4, distance);
+        }
+
+        [Test]
+        public void GetDistance_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var distance = hexLibrary.GetDistance(new HexOffsetCoordinates(1, 0), new HexOffsetCoordinates(3, 4));
+
+            Assert.AreEqual(4, distance);
+        }
+
+        [Test]
+        public void FromOffsetCoordinatesToPixel_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            var pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            var pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            var pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(0.0f, 0.0f), pixel00);
+            Assert.AreEqual(new Point2F(0.0f, 110.85125f), pixel01);
+            Assert.AreEqual(new Point2F(96.0f, 55.425625f), pixel10);
+            Assert.AreEqual(new Point2F(96.0f, 166.27687f), pixel11);
+
+            hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f, false);
+
+            pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(64.0f, 55.425625f), pixel00);
+            Assert.AreEqual(new Point2F(64.0f, 166.27687f), pixel01);
+            Assert.AreEqual(new Point2F(160.0f, 110.85125f), pixel10);
+            Assert.AreEqual(new Point2F(160.0f, 221.7025f), pixel11);
+        }
+
+        [Test]
+        public void FromOffsetCoordinatesToPixel_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            var pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            var pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            var pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(0.0f, 0.0f), pixel00);
+            Assert.AreEqual(new Point2F(0.0f, 110.85125f), pixel01);
+            Assert.AreEqual(new Point2F(96.0f, -55.425625f), pixel10);
+            Assert.AreEqual(new Point2F(96.0f, 55.425625f), pixel11);
+
+            hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f, false);
+
+            pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(64.0f, 110.85125f), pixel00);
+            Assert.AreEqual(new Point2F(64.0f, 221.7025f), pixel01);
+            Assert.AreEqual(new Point2F(160.0f, 55.425625f), pixel10);
+            Assert.AreEqual(new Point2F(160.0f, 166.27687f), pixel11);
+        }
+
+        [Test]
+        public void FromOffsetCoordinatesToPixel_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            var pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            var pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            var pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(0.0f, 0.0f), pixel00);
+            Assert.AreEqual(new Point2F(55.425625f, 96.0f), pixel01);
+            Assert.AreEqual(new Point2F(110.85125f, 0.0f), pixel10);
+            Assert.AreEqual(new Point2F(166.27687f, 96.0f), pixel11);
+
+            hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f, false);
+
+            pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(55.425625f, 64.0f), pixel00);
+            Assert.AreEqual(new Point2F(110.85125f, 160.0f), pixel01);
+            Assert.AreEqual(new Point2F(166.27687f, 64.0f), pixel10);
+            Assert.AreEqual(new Point2F(221.7025f, 160.0f), pixel11);
+        }
+
+        [Test]
+        public void FromOffsetCoordinatesToPixel_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            var pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            var pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            var pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(0.0f, 0.0f), pixel00);
+            Assert.AreEqual(new Point2F(-55.425625f, 96.0f), pixel01);
+            Assert.AreEqual(new Point2F(110.85125f, 0.0f), pixel10);
+            Assert.AreEqual(new Point2F(55.425625f, 96.0f), pixel11);
+
+            hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f, false);
+
+            pixel00 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 0));
+            pixel01 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(0, 1));
+            pixel10 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 0));
+            pixel11 = hexLibrary.FromOffsetCoordinatesToPixel(new HexOffsetCoordinates(1, 1));
+
+            Assert.AreEqual(new Point2F(110.85125f, 64.0f), pixel00);
+            Assert.AreEqual(new Point2F(55.425625f, 160.0f), pixel01);
+            Assert.AreEqual(new Point2F(221.7025f, 64.0f), pixel10);
+            Assert.AreEqual(new Point2F(166.27687f, 160.0f), pixel11);
+        }
+
+        [Test]
+        public void FromPixelToOffsetCoordinates_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset00 = hexLibrary.FromPixelToOffsetCoordinates(0, 0);
+            var offset01 = hexLibrary.FromPixelToOffsetCoordinates(0, 111);
+            var offset10 = hexLibrary.FromPixelToOffsetCoordinates(96, 55);
+            var offset11 = hexLibrary.FromPixelToOffsetCoordinates(96, 166);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+
+            hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f, false);
+
+            offset00 = hexLibrary.FromPixelToOffsetCoordinates(64, 55);
+            offset01 = hexLibrary.FromPixelToOffsetCoordinates(64, 111);
+            offset10 = hexLibrary.FromPixelToOffsetCoordinates(160, 111);
+            offset11 = hexLibrary.FromPixelToOffsetCoordinates(160, 222);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void FromPixelToOffsetCoordinates_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset00 = hexLibrary.FromPixelToOffsetCoordinates(0, 0);
+            var offset01 = hexLibrary.FromPixelToOffsetCoordinates(0, 111);
+            var offset10 = hexLibrary.FromPixelToOffsetCoordinates(96, -55);
+            var offset11 = hexLibrary.FromPixelToOffsetCoordinates(96, 55);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+
+            hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f, false);
+
+            offset00 = hexLibrary.FromPixelToOffsetCoordinates(64, 111);
+            offset01 = hexLibrary.FromPixelToOffsetCoordinates(64, 222);
+            offset10 = hexLibrary.FromPixelToOffsetCoordinates(160, 55);
+            offset11 = hexLibrary.FromPixelToOffsetCoordinates(160, 166);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void FromPixelToOffsetCoordinates_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset00 = hexLibrary.FromPixelToOffsetCoordinates(0, 0);
+            var offset01 = hexLibrary.FromPixelToOffsetCoordinates(55, 96);
+            var offset10 = hexLibrary.FromPixelToOffsetCoordinates(111, 0);
+            var offset11 = hexLibrary.FromPixelToOffsetCoordinates(166, 96);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+
+            hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f, false);
+
+            offset00 = hexLibrary.FromPixelToOffsetCoordinates(55, 64);
+            offset01 = hexLibrary.FromPixelToOffsetCoordinates(111, 160);
+            offset10 = hexLibrary.FromPixelToOffsetCoordinates(166, 64);
+            offset11 = hexLibrary.FromPixelToOffsetCoordinates(222, 160);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void FromPixelToOffsetCoordinates_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset00 = hexLibrary.FromPixelToOffsetCoordinates(0, 0);
+            var offset01 = hexLibrary.FromPixelToOffsetCoordinates(-55, 96);
+            var offset10 = hexLibrary.FromPixelToOffsetCoordinates(110, 0);
+            var offset11 = hexLibrary.FromPixelToOffsetCoordinates(55, 96);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+
+            hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f, false);
+
+            offset00 = hexLibrary.FromPixelToOffsetCoordinates(111, 64);
+            offset01 = hexLibrary.FromPixelToOffsetCoordinates(55, 160);
+            offset10 = hexLibrary.FromPixelToOffsetCoordinates(222, 64);
+            offset11 = hexLibrary.FromPixelToOffsetCoordinates(166, 160);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void RoundOffsetCoordinates_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset00 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.3f);
+            var offset01 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.8f);
+            var offset10 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.3f);
+            var offset11 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.8f);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void RoundOffsetCoordinates_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset00 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.3f);
+            var offset01 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.8f);
+            var offset11 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.3f);
+            var offset12 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.8f);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), offset12);
+        }
+
+        [Test]
+        public void RoundOffsetCoordinates_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset00 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.3f);
+            var offset01 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.8f);
+            var offset10 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.3f);
+            var offset11 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.8f);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset01);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+        }
+
+        [Test]
+        public void RoundOffsetCoordinates_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset00 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.3f);
+            var offset11 = hexLibrary.RoundOffsetCoordinates(0.3f, 0.8f);
+            var offset10 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.3f);
+            var offset21 = hexLibrary.RoundOffsetCoordinates(0.8f, 0.8f);
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset00);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), offset21);
+        }
     }
 }

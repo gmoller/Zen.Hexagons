@@ -16,7 +16,7 @@ namespace Zen.Hexagons
             new HexCubeCoordinates(-1, +1,  0), // northwest
         };
 
-        public HexFlatTopped(OffsetCoordinatesType offsetCoordinatesType, float hexSize) : base(HexType.FlatTopped, offsetCoordinatesType, hexSize)
+        public HexFlatTopped(OffsetCoordinatesType offsetCoordinatesType, float hexSize, bool align00With00) : base(HexType.FlatTopped, offsetCoordinatesType, hexSize, align00With00)
         {
         }
 
@@ -75,7 +75,7 @@ namespace Zen.Hexagons
                 _ => throw new ArgumentOutOfRangeException(nameof(OffsetCoordinatesType), OffsetCoordinatesType, $"OffsetCoordinatesType {OffsetCoordinatesType} is not supported.")
             };
 
-            var pixel = new Point2F(x, y);
+            var pixel = new Point2F(x, y) + Offset;
 
             return pixel;
         }
@@ -119,6 +119,19 @@ namespace Zen.Hexagons
         protected override float GetHeight()
         {
             return SideToSide;
+        }
+
+        protected override Point2F DetermineOffset()
+        {
+            switch (OffsetCoordinatesType)
+            {
+                case OffsetCoordinatesType.Odd:
+                    return new Point2F(Size, Apothem);
+                case OffsetCoordinatesType.Even:
+                    return new Point2F(Size, SideToSide);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(OffsetCoordinatesType), OffsetCoordinatesType, $"OffsetCoordinatesType {OffsetCoordinatesType} is not supported.");
+            }
         }
 
         public override int GetWorldWidthInPixels(int worldMapColumns)

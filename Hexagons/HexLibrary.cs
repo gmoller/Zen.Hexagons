@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Zen.Hexagons
 {
@@ -10,12 +9,12 @@ namespace Zen.Hexagons
     {
         private readonly IHex _hex;
 
-        public HexLibrary(HexType hexType, OffsetCoordinatesType offsetCoordinatesType, float hexSize)
+        public HexLibrary(HexType hexType, OffsetCoordinatesType offsetCoordinatesType, float hexSize, bool align00With00 = true)
         {
             _hex = hexType switch
             {
-                HexType.FlatTopped => new HexFlatTopped(offsetCoordinatesType, hexSize),
-                HexType.PointyTopped => new HexPointyTopped(offsetCoordinatesType, hexSize),
+                HexType.FlatTopped => new HexFlatTopped(offsetCoordinatesType, hexSize, align00With00),
+                HexType.PointyTopped => new HexPointyTopped(offsetCoordinatesType, hexSize, align00With00),
                 _ => throw new ArgumentOutOfRangeException(nameof(hexType), hexType, $"HexType {hexType} is not supported.")
             };
         }
@@ -42,15 +41,15 @@ namespace Zen.Hexagons
         public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction) => _hex.GetNeighbor(offset, direction);
         public HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offset, int radius) => _hex.GetSingleRing(offset, radius);
         public HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offset, int radius) => _hex.GetSpiralRing(offset, radius);
-        public List<HexOffsetCoordinates> GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset) => _hex.GetLine(fromOffset, toOffset);
+        public HexOffsetCoordinates[] GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset) => _hex.GetLine(fromOffset, toOffset);
         public int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset) => _hex.GetDistance(fromOffset, toOffset);
-        public HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y) => _hex.FromPixelToOffsetCoordinates(x, y);
         public Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset) => _hex.FromOffsetCoordinatesToPixel(offset);
+        public HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y) => _hex.FromPixelToOffsetCoordinates(x, y);
         public HexOffsetCoordinates RoundOffsetCoordinates(float x, float y) => _hex.RoundOffsetCoordinates(x, y);
 
         public HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube) => _hex.GetAllNeighbors(cube);
         public HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction) => _hex.GetNeighbor(cube, direction);
-        public List<HexCubeCoordinates> GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetLine(fromCube, toCube);
+        public HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetLine(fromCube, toCube);
         public int GetDistance(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetDistance(fromCube, toCube);
         public HexCubeCoordinates FromPixelToCube(int x, int y) => _hex.FromPixelToCube(x, y);
         public Point2F FromCubeToPixel(HexCubeCoordinates cube) => _hex.FromCubeToPixel(cube);
