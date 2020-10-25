@@ -12,13 +12,12 @@ namespace Zen.HexagonsTests
 
             var neighbors = hexLibrary.GetAllNeighbors(new HexOffsetCoordinates(1, 1));
 
-            Assert.AreEqual(6, neighbors.Length);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors[0]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors[1]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 2), neighbors[2]);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors[3]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 2), neighbors[4]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors.HexOffsetCoordinates0);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors.HexOffsetCoordinates1);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), neighbors.HexOffsetCoordinates2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors.HexOffsetCoordinates3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), neighbors.HexOffsetCoordinates4);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors.HexOffsetCoordinates5);
         }
 
         [Test]
@@ -28,13 +27,12 @@ namespace Zen.HexagonsTests
 
             var neighbors = hexLibrary.GetAllNeighbors(new HexOffsetCoordinates(1, 1));
 
-            Assert.AreEqual(6, neighbors.Length);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors[0]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 0), neighbors[1]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors[2]);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors[3]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors[4]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 0), neighbors[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors.HexOffsetCoordinates0);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), neighbors.HexOffsetCoordinates1);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors.HexOffsetCoordinates2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors.HexOffsetCoordinates3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors.HexOffsetCoordinates4);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), neighbors.HexOffsetCoordinates5);
         }
 
         [Test]
@@ -44,13 +42,12 @@ namespace Zen.HexagonsTests
 
             var neighbors = hexLibrary.GetAllNeighbors(new HexOffsetCoordinates(1, 1));
 
-            Assert.AreEqual(6, neighbors.Length);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 0), neighbors[0]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors[1]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 2), neighbors[2]);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors[3]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors[4]);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), neighbors.HexOffsetCoordinates0);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors.HexOffsetCoordinates1);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 2), neighbors.HexOffsetCoordinates2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors.HexOffsetCoordinates3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors.HexOffsetCoordinates4);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors.HexOffsetCoordinates5);
         }
 
         [Test]
@@ -60,13 +57,12 @@ namespace Zen.HexagonsTests
 
             var neighbors = hexLibrary.GetAllNeighbors(new HexOffsetCoordinates(1, 1));
 
-            Assert.AreEqual(6, neighbors.Length);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors[0]);
-            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors[1]);
-            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors[2]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 2), neighbors[3]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors[4]);
-            Assert.AreEqual(new HexOffsetCoordinates(0, 0), neighbors[5]);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), neighbors.HexOffsetCoordinates0);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), neighbors.HexOffsetCoordinates1);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), neighbors.HexOffsetCoordinates2);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), neighbors.HexOffsetCoordinates3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), neighbors.HexOffsetCoordinates4);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), neighbors.HexOffsetCoordinates5);
         }
 
         [Test]

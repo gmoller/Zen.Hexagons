@@ -37,7 +37,7 @@ namespace Zen.Hexagons
         public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial) => _hex.AxialToOffsetCoordinates(axial);
         public HexCubeCoordinates AxialToCube(HexAxialCoordinates axial) => _hex.AxialToCube(axial);
 
-        public HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates offset) => _hex.GetAllNeighbors(offset);
+        public HexOffsetCoordinatesSextuple GetAllNeighbors(HexOffsetCoordinates offset) => _hex.GetAllNeighbors(offset);
         public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction) => _hex.GetNeighbor(offset, direction);
         public HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offset, int radius) => _hex.GetSingleRing(offset, radius);
         public HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offset, int radius) => _hex.GetSpiralRing(offset, radius);
@@ -61,7 +61,7 @@ namespace Zen.Hexagons
 
         public Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t) => _hex.Lerp(fromCube, toCube, t);
 
-        public Point2F[] GetCorners() => _hex.GetCorners();
+        public Point2FSextuple GetCorners() => _hex.GetCorners();
         public int GetWorldWidthInPixels(int worldMapColumns) => _hex.GetWorldWidthInPixels(worldMapColumns);
         public int GetWorldHeightInPixels(int worldMapRows) => _hex.GetWorldHeightInPixels(worldMapRows);
     }

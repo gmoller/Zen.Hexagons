@@ -98,15 +98,17 @@ namespace Zen.Hexagons
             return pixel;
         }
 
-        public override Point2F[] GetCorners()
+        public override Point2FSextuple GetCorners()
         {
-            var corners = new Point2F[6];
-            corners[0] = GetCorner(Direction.NorthEast);
-            corners[1] = GetCorner(Direction.East);
-            corners[2] = GetCorner(Direction.SouthEast);
-            corners[3] = GetCorner(Direction.SouthWest);
-            corners[4] = GetCorner(Direction.West);
-            corners[5] = GetCorner(Direction.NorthWest);
+            var corners = new Point2FSextuple
+            {
+                Point0 = GetCorner(Direction.NorthEast),
+                Point1 = GetCorner(Direction.East),
+                Point2 = GetCorner(Direction.SouthEast),
+                Point3 = GetCorner(Direction.SouthWest),
+                Point4 = GetCorner(Direction.West),
+                Point5 = GetCorner(Direction.NorthWest)
+            };
 
             return corners;
         }

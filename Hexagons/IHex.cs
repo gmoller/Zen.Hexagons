@@ -21,7 +21,7 @@
         HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial);
         HexCubeCoordinates AxialToCube(HexAxialCoordinates axial);
 
-        HexOffsetCoordinates[] GetAllNeighbors(HexOffsetCoordinates offset); //
+        HexOffsetCoordinatesSextuple GetAllNeighbors(HexOffsetCoordinates offset); //
         HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction); //
         HexOffsetCoordinates[] GetSingleRing(HexOffsetCoordinates offset, int radius); //
         HexOffsetCoordinates[] GetSpiralRing(HexOffsetCoordinates offset, int radius); //
@@ -54,7 +54,7 @@
         HexAxialCoordinates RoundAxial(float q, float r);
         //Point3F Lerp(HexAxialCoordinates fromAxial, HexAxialCoordinates toAxial, float t);
 
-        Point2F[] GetCorners();
+        Point2FSextuple GetCorners();
 
         int GetWorldWidthInPixels(int worldMapColumns);
         int GetWorldHeightInPixels(int worldMapRows);
