@@ -749,5 +749,281 @@ namespace Zen.HexagonsTests
             Assert.AreEqual(new HexAxialCoordinates(-2, 1), axial17);
             Assert.AreEqual(new HexAxialCoordinates(-2, 0), axial18);
         }
+
+        [Test]
+        public void AxialToCubeCoordinates_Q()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var cube0 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 0));
+            var cube1 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, -1));
+            var cube2 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, -1));
+            var cube3 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, 0));
+            var cube4 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 1));
+            var cube5 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 1));
+            var cube6 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 0));
+            var cube7 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, -1));
+            var cube8 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, -2));
+            var cube9 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, -2));
+            var cube10 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, -2));
+            var cube11 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, -1));
+            var cube12 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, 0));
+            var cube13 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, 1));
+            var cube14 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 2));
+            var cube15 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 2));
+            var cube16 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 2));
+            var cube17 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 1));
+            var cube18 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexCubeCoordinates(0, 0, 0), cube0);
+            Assert.AreEqual(new HexCubeCoordinates(0, 1, -1), cube1);
+            Assert.AreEqual(new HexCubeCoordinates(1, 0, -1), cube2);
+            Assert.AreEqual(new HexCubeCoordinates(1, -1, 0), cube3);
+            Assert.AreEqual(new HexCubeCoordinates(0, -1, 1), cube4);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 0, 1), cube5);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 1, 0), cube6);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 2, -1), cube7);
+            Assert.AreEqual(new HexCubeCoordinates(0, 2, -2), cube8);
+            Assert.AreEqual(new HexCubeCoordinates(1, 1, -2), cube9);
+            Assert.AreEqual(new HexCubeCoordinates(2, 0, -2), cube10);
+            Assert.AreEqual(new HexCubeCoordinates(2, -1, -1), cube11);
+            Assert.AreEqual(new HexCubeCoordinates(2, -2, 0), cube12);
+            Assert.AreEqual(new HexCubeCoordinates(1, -2, 1), cube13);
+            Assert.AreEqual(new HexCubeCoordinates(0, -2, 2), cube14);
+            Assert.AreEqual(new HexCubeCoordinates(-1, -1, 2), cube15);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 0, 2), cube16);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 1, 1), cube17);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 2, 0), cube18);
+        }
+
+        [Test]
+        public void AxialToOffsetCoordinates_OddQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset0 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 0));
+            var offset1 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -1));
+            var offset2 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -1));
+            var offset3 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 0));
+            var offset4 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 1));
+            var offset5 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 1));
+            var offset6 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 0));
+            var offset7 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, -1));
+            var offset8 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -2));
+            var offset9 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -2));
+            var offset10 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -2));
+            var offset11 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -1));
+            var offset12 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, 0));
+            var offset13 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 1));
+            var offset14 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 2));
+            var offset15 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 2));
+            var offset16 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 2));
+            var offset17 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 1));
+            var offset18 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset0);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -1), offset1);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -1), offset2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset4);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 0), offset5);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -1), offset6);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -2), offset7);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -2), offset8);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -2), offset9);
+            Assert.AreEqual(new HexOffsetCoordinates(2, -1), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), offset12);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset13);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), offset14);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 1), offset15);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 1), offset16);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 0), offset17);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, -1), offset18);
+        }
+
+        [Test]
+        public void AxialToOffsetCoordinates_EvenQ()
+        {
+            var hexLibrary = new HexLibrary(HexType.FlatTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset0 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 0));
+            var offset1 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -1));
+            var offset2 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -1));
+            var offset3 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 0));
+            var offset4 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 1));
+            var offset5 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 1));
+            var offset6 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 0));
+            var offset7 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, -1));
+            var offset8 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -2));
+            var offset9 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -2));
+            var offset10 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -2));
+            var offset11 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -1));
+            var offset12 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, 0));
+            var offset13 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 1));
+            var offset14 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 2));
+            var offset15 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 2));
+            var offset16 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 2));
+            var offset17 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 1));
+            var offset18 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset0);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -1), offset1);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset4);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 1), offset5);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 0), offset6);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -1), offset7);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -2), offset8);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -1), offset9);
+            Assert.AreEqual(new HexOffsetCoordinates(2, -1), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), offset12);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), offset13);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), offset14);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 2), offset15);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 1), offset16);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 0), offset17);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, -1), offset18);
+        }
+
+        [Test]
+        public void AxialToOffsetCoordinates_OddR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var offset0 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 0));
+            var offset1 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -1));
+            var offset2 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -1));
+            var offset3 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 0));
+            var offset4 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 1));
+            var offset5 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 1));
+            var offset6 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 0));
+            var offset7 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, -1));
+            var offset8 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -2));
+            var offset9 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -2));
+            var offset10 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -2));
+            var offset11 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -1));
+            var offset12 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, 0));
+            var offset13 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 1));
+            var offset14 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 2));
+            var offset15 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 2));
+            var offset16 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 2));
+            var offset17 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 1));
+            var offset18 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset0);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -1), offset1);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -1), offset2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset3);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset4);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 1), offset5);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 0), offset6);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, -1), offset7);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -2), offset8);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -2), offset9);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -2), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -1), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), offset12);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset13);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), offset14);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), offset15);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 2), offset16);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 1), offset17);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 0), offset18);
+        }
+
+        [Test]
+        public void AxialToOffsetCoordinates_EvenR()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Even, 64.0f);
+
+            var offset0 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 0));
+            var offset1 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -1));
+            var offset2 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -1));
+            var offset3 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 0));
+            var offset4 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 1));
+            var offset5 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 1));
+            var offset6 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 0));
+            var offset7 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, -1));
+            var offset8 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, -2));
+            var offset9 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, -2));
+            var offset10 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -2));
+            var offset11 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, -1));
+            var offset12 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(2, 0));
+            var offset13 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(1, 1));
+            var offset14 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(0, 2));
+            var offset15 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-1, 2));
+            var offset16 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 2));
+            var offset17 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 1));
+            var offset18 = hexLibrary.AxialToOffsetCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexOffsetCoordinates(0, 0), offset0);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -1), offset1);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -1), offset2);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 0), offset3);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 1), offset4);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 1), offset5);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 0), offset6);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -1), offset7);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, -2), offset8);
+            Assert.AreEqual(new HexOffsetCoordinates(0, -2), offset9);
+            Assert.AreEqual(new HexOffsetCoordinates(1, -2), offset10);
+            Assert.AreEqual(new HexOffsetCoordinates(2, -1), offset11);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 0), offset12);
+            Assert.AreEqual(new HexOffsetCoordinates(2, 1), offset13);
+            Assert.AreEqual(new HexOffsetCoordinates(1, 2), offset14);
+            Assert.AreEqual(new HexOffsetCoordinates(0, 2), offset15);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 2), offset16);
+            Assert.AreEqual(new HexOffsetCoordinates(-1, 1), offset17);
+            Assert.AreEqual(new HexOffsetCoordinates(-2, 0), offset18);
+        }
+
+        [Test]
+        public void AxialToCubeCoordinates_R()
+        {
+            var hexLibrary = new HexLibrary(HexType.PointyTopped, OffsetCoordinatesType.Odd, 64.0f);
+
+            var cube0 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 0));
+            var cube1 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, -1));
+            var cube2 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, -1));
+            var cube3 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, 0));
+            var cube4 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 1));
+            var cube5 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 1));
+            var cube6 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 0));
+            var cube7 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, -1));
+            var cube8 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, -2));
+            var cube9 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, -2));
+            var cube10 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, -2));
+            var cube11 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, -1));
+            var cube12 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(2, 0));
+            var cube13 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(1, 1));
+            var cube14 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(0, 2));
+            var cube15 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-1, 2));
+            var cube16 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 2));
+            var cube17 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 1));
+            var cube18 = hexLibrary.AxialToCubeCoordinates(new HexAxialCoordinates(-2, 0));
+
+            Assert.AreEqual(new HexCubeCoordinates(0, 0, 0), cube0);
+            Assert.AreEqual(new HexCubeCoordinates(0, 1, -1), cube1);
+            Assert.AreEqual(new HexCubeCoordinates(1, 0, -1), cube2);
+            Assert.AreEqual(new HexCubeCoordinates(1, -1, 0), cube3);
+            Assert.AreEqual(new HexCubeCoordinates(0, -1, 1), cube4);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 0, 1), cube5);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 1, 0), cube6);
+            Assert.AreEqual(new HexCubeCoordinates(-1, 2, -1), cube7);
+            Assert.AreEqual(new HexCubeCoordinates(0, 2, -2), cube8);
+            Assert.AreEqual(new HexCubeCoordinates(1, 1, -2), cube9);
+            Assert.AreEqual(new HexCubeCoordinates(2, 0, -2), cube10);
+            Assert.AreEqual(new HexCubeCoordinates(2, -1, -1), cube11);
+            Assert.AreEqual(new HexCubeCoordinates(2, -2, 0), cube12);
+            Assert.AreEqual(new HexCubeCoordinates(1, -2, 1), cube13);
+            Assert.AreEqual(new HexCubeCoordinates(0, -2, 2), cube14);
+            Assert.AreEqual(new HexCubeCoordinates(-1, -1, 2), cube15);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 0, 2), cube16);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 1, 1), cube17);
+            Assert.AreEqual(new HexCubeCoordinates(-2, 2, 0), cube18);
+        }
     }
 }

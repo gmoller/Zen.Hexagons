@@ -47,19 +47,18 @@ namespace Zen.Hexagons
         public HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y) => _hex.FromPixelToOffsetCoordinates(x, y);
         public HexOffsetCoordinates RoundOffsetCoordinates(float x, float y) => _hex.RoundOffsetCoordinates(x, y);
 
-        public HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube) => _hex.GetAllNeighbors(cube);
+        public HexCubeCoordinatesSextuple GetAllNeighbors(HexCubeCoordinates cube) => _hex.GetAllNeighbors(cube);
         public HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction) => _hex.GetNeighbor(cube, direction);
         public HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetLine(fromCube, toCube);
         public int GetDistance(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetDistance(fromCube, toCube);
         public HexCubeCoordinates FromPixelToCubeCoordinates(int x, int y) => _hex.FromPixelToCubeCoordinates(x, y);
         public Point2F FromCubeCoordinatesToPixel(HexCubeCoordinates cube) => _hex.FromCubeCoordinatesToPixel(cube);
         public HexCubeCoordinates RoundCubeCoordinates(float x, float y, float z) => _hex.RoundCubeCoordinates(x, y, z);
+        public Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t) => _hex.Lerp(fromCube, toCube, t);
 
         public HexAxialCoordinates FromPixelToAxialCoordinates(int x, int y) => _hex.FromPixelToAxialCoordinates(x, y);
         public Point2F FromAxialCoordinatesToPixel(HexAxialCoordinates axial) => _hex.FromAxialCoordinatesToPixel(axial);
         public HexAxialCoordinates RoundAxialCoordinates(float q, float r) => _hex.RoundAxialCoordinates(q, r);
-
-        public Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t) => _hex.Lerp(fromCube, toCube, t);
 
         public Point2FSextuple GetCorners() => _hex.GetCorners();
         public int GetWorldWidthInPixels(int worldMapColumns) => _hex.GetWorldWidthInPixels(worldMapColumns);

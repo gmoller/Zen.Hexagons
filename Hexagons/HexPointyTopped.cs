@@ -98,6 +98,31 @@ namespace Zen.Hexagons
             return pixel;
         }
 
+        public override HexCubeCoordinatesSextuple GetAllNeighbors(HexCubeCoordinates cube)
+        {
+            var neighbors = new HexCubeCoordinatesSextuple();
+
+            var neighboringCube = GetNeighbor(cube, Direction.NorthEast);
+            neighbors.HexCubeCoordinates0 = neighboringCube;
+
+            neighboringCube = GetNeighbor(cube, Direction.East);
+            neighbors.HexCubeCoordinates1 = neighboringCube;
+
+            neighboringCube = GetNeighbor(cube, Direction.SouthEast);
+            neighbors.HexCubeCoordinates2 = neighboringCube;
+
+            neighboringCube = GetNeighbor(cube, Direction.SouthWest);
+            neighbors.HexCubeCoordinates3 = neighboringCube;
+
+            neighboringCube = GetNeighbor(cube, Direction.West);
+            neighbors.HexCubeCoordinates4 = neighboringCube;
+
+            neighboringCube = GetNeighbor(cube, Direction.NorthWest);
+            neighbors.HexCubeCoordinates5 = neighboringCube;
+
+            return neighbors;
+        }
+
         public override Point2FSextuple GetCorners()
         {
             var corners = new Point2FSextuple

@@ -91,27 +91,27 @@ namespace Zen.Hexagons
 
             var neighbors = new HexOffsetCoordinatesSextuple();
 
-            var neighboringCube = allNeighboringCubes[0];
+            var neighboringCube = allNeighboringCubes.HexCubeCoordinates0;
             var neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates0 = neighboring;
 
-            neighboringCube = allNeighboringCubes[1];
+            neighboringCube = allNeighboringCubes.HexCubeCoordinates1;
             neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates1 = neighboring;
 
-            neighboringCube = allNeighboringCubes[2];
+            neighboringCube = allNeighboringCubes.HexCubeCoordinates2;
             neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates2 = neighboring;
 
-            neighboringCube = allNeighboringCubes[3];
+            neighboringCube = allNeighboringCubes.HexCubeCoordinates3;
             neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates3 = neighboring;
 
-            neighboringCube = allNeighboringCubes[4];
+            neighboringCube = allNeighboringCubes.HexCubeCoordinates4;
             neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates4 = neighboring;
 
-            neighboringCube = allNeighboringCubes[5];
+            neighboringCube = allNeighboringCubes.HexCubeCoordinates5;
             neighboring = CubeToOffsetCoordinates(neighboringCube);
             neighbors.HexOffsetCoordinates5 = neighboring;
 
@@ -238,22 +238,7 @@ namespace Zen.Hexagons
             return offsetCoordinates;
         }
 
-        public HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube)
-        {
-            var neighbors = new HexCubeCoordinates[6];
-            var cnt = 0;
-            for (var i = 0; i < 8; i++)
-            {
-                var neighbor = GetNeighbor(cube, (Direction)i);
-                if (neighbor != cube)
-                {
-                    neighbors[cnt] = neighbor;
-                    cnt++;
-                }
-            }
-
-            return neighbors;
-        }
+        public abstract HexCubeCoordinatesSextuple GetAllNeighbors(HexCubeCoordinates cube);
 
         public HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction)
         {

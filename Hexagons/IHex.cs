@@ -18,8 +18,8 @@
         HexAxialCoordinates OffsetToAxialCoordinates(HexOffsetCoordinates offset); //
         HexOffsetCoordinates CubeToOffsetCoordinates(HexCubeCoordinates cube); //
         HexAxialCoordinates CubeToAxialCoordinates(HexCubeCoordinates cube); //
-        HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial);
-        HexCubeCoordinates AxialToCubeCoordinates(HexAxialCoordinates axial);
+        HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial); //
+        HexCubeCoordinates AxialToCubeCoordinates(HexAxialCoordinates axial); //
 
         HexOffsetCoordinatesSextuple GetAllNeighbors(HexOffsetCoordinates offset); //
         HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction); //
@@ -30,10 +30,9 @@
         Point2F FromOffsetCoordinatesToPixel(HexOffsetCoordinates offset); //
         HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y); //
         HexOffsetCoordinates RoundOffsetCoordinates(float x, float y); //
-        //Point3F Lerp(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset, float t);
 
-        HexCubeCoordinates[] GetAllNeighbors(HexCubeCoordinates cube);
-        HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction);
+        HexCubeCoordinatesSextuple GetAllNeighbors(HexCubeCoordinates cube); //
+        HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction); //
         //HexCubeCoordinates[] GetSingleRing(HexCubeCoordinates offset, int radius);
         //HexCubeCoordinates[] GetSpiralRing(HexCubeCoordinates offset, int radius);
         HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube);
