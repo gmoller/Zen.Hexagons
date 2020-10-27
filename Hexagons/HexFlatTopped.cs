@@ -29,7 +29,7 @@ namespace Zen.Hexagons
         }
 
 
-        public override HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset)
+        public override HexCubeCoordinates OffsetToCubeCoordinates(HexOffsetCoordinates offset)
         {
             var col = offset.Col;
             var row = offset.Row;
@@ -80,16 +80,16 @@ namespace Zen.Hexagons
             return pixel;
         }
 
-        public override HexAxialCoordinates FromPixelToAxial(int x, int y)
+        public override HexAxialCoordinates FromPixelToAxialCoordinates(int x, int y)
         {
             var q = (float)(Constants.TwoThirds * x / Size);
             var r = (float)((-Constants.OneThird * x + Constants.OneThirdOfSquareRootOf3 * y) / Size);
-            var axial = RoundAxial(q, r);
+            var axial = RoundAxialCoordinates(q, r);
 
             return axial;
         }
 
-        public override Point2F FromAxialToPixel(HexAxialCoordinates axial)
+        public override Point2F FromAxialCoordinatesToPixel(HexAxialCoordinates axial)
         {
             var x = Size * (1.5f * axial.Q);
             var y = (float)(Size * (Constants.HalfOfSquareRootOf3 * axial.Q + Constants.SquareRootOf3 * axial.R));

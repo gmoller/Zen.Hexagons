@@ -30,12 +30,12 @@ namespace Zen.Hexagons
         public float CenterToVertex => _hex.CenterToVertex;
         public float VertexToVertex => _hex.VertexToVertex;
 
-        public HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset) => _hex.OffsetCoordinatesToCube(offset);
-        public HexAxialCoordinates OffsetCoordinatesToAxial(HexOffsetCoordinates offset) => _hex.OffsetCoordinatesToAxial(offset);
+        public HexCubeCoordinates OffsetToCubeCoordinates(HexOffsetCoordinates offset) => _hex.OffsetToCubeCoordinates(offset);
+        public HexAxialCoordinates OffsetToAxialCoordinates(HexOffsetCoordinates offset) => _hex.OffsetToAxialCoordinates(offset);
         public HexOffsetCoordinates CubeToOffsetCoordinates(HexCubeCoordinates cube) => _hex.CubeToOffsetCoordinates(cube);
-        public HexAxialCoordinates CubeToAxial(HexCubeCoordinates cube) => _hex.CubeToAxial(cube);
+        public HexAxialCoordinates CubeToAxialCoordinates(HexCubeCoordinates cube) => _hex.CubeToAxialCoordinates(cube);
         public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial) => _hex.AxialToOffsetCoordinates(axial);
-        public HexCubeCoordinates AxialToCube(HexAxialCoordinates axial) => _hex.AxialToCube(axial);
+        public HexCubeCoordinates AxialToCubeCoordinates(HexAxialCoordinates axial) => _hex.AxialToCubeCoordinates(axial);
 
         public HexOffsetCoordinatesSextuple GetAllNeighbors(HexOffsetCoordinates offset) => _hex.GetAllNeighbors(offset);
         public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction) => _hex.GetNeighbor(offset, direction);
@@ -51,13 +51,13 @@ namespace Zen.Hexagons
         public HexCubeCoordinates GetNeighbor(HexCubeCoordinates cube, Direction direction) => _hex.GetNeighbor(cube, direction);
         public HexCubeCoordinates[] GetLine(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetLine(fromCube, toCube);
         public int GetDistance(HexCubeCoordinates fromCube, HexCubeCoordinates toCube) => _hex.GetDistance(fromCube, toCube);
-        public HexCubeCoordinates FromPixelToCube(int x, int y) => _hex.FromPixelToCube(x, y);
-        public Point2F FromCubeToPixel(HexCubeCoordinates cube) => _hex.FromCubeToPixel(cube);
-        public HexCubeCoordinates RoundCube(float x, float y, float z) => _hex.RoundCube(x, y, z);
+        public HexCubeCoordinates FromPixelToCubeCoordinates(int x, int y) => _hex.FromPixelToCubeCoordinates(x, y);
+        public Point2F FromCubeCoordinatesToPixel(HexCubeCoordinates cube) => _hex.FromCubeCoordinatesToPixel(cube);
+        public HexCubeCoordinates RoundCubeCoordinates(float x, float y, float z) => _hex.RoundCubeCoordinates(x, y, z);
 
-        public HexAxialCoordinates FromPixelToAxial(int x, int y) => _hex.FromPixelToAxial(x, y);
-        public Point2F FromAxialToPixel(HexAxialCoordinates axial) => _hex.FromAxialToPixel(axial);
-        public HexAxialCoordinates RoundAxial(float q, float r) => _hex.RoundAxial(q, r);
+        public HexAxialCoordinates FromPixelToAxialCoordinates(int x, int y) => _hex.FromPixelToAxialCoordinates(x, y);
+        public Point2F FromAxialCoordinatesToPixel(HexAxialCoordinates axial) => _hex.FromAxialCoordinatesToPixel(axial);
+        public HexAxialCoordinates RoundAxialCoordinates(float q, float r) => _hex.RoundAxialCoordinates(q, r);
 
         public Point3F Lerp(HexCubeCoordinates fromCube, HexCubeCoordinates toCube, float t) => _hex.Lerp(fromCube, toCube, t);
 

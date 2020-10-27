@@ -45,19 +45,19 @@ namespace Zen.Hexagons
 
         protected abstract Point2F DetermineOffset();
 
-        public abstract HexCubeCoordinates OffsetCoordinatesToCube(HexOffsetCoordinates offset);
+        public abstract HexCubeCoordinates OffsetToCubeCoordinates(HexOffsetCoordinates offset);
 
-        public HexAxialCoordinates OffsetCoordinatesToAxial(HexOffsetCoordinates offset)
+        public HexAxialCoordinates OffsetToAxialCoordinates(HexOffsetCoordinates offset)
         {
-            var cube = OffsetCoordinatesToCube(offset);
-            var axial = CubeToAxial(cube);
+            var cube = OffsetToCubeCoordinates(offset);
+            var axial = CubeToAxialCoordinates(cube);
 
             return axial;
         }
 
         public abstract HexOffsetCoordinates CubeToOffsetCoordinates(HexCubeCoordinates cube);
 
-        public HexAxialCoordinates CubeToAxial(HexCubeCoordinates cube)
+        public HexAxialCoordinates CubeToAxialCoordinates(HexCubeCoordinates cube)
         {
             var q = cube.X;
             var r = cube.Z;
@@ -68,13 +68,13 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinates AxialToOffsetCoordinates(HexAxialCoordinates axial)
         {
-            var cube = AxialToCube(axial);
+            var cube = AxialToCubeCoordinates(axial);
             var offsetCoordinates = CubeToOffsetCoordinates(cube);
 
             return offsetCoordinates;
         }
 
-        public HexCubeCoordinates AxialToCube(HexAxialCoordinates axial)
+        public HexCubeCoordinates AxialToCubeCoordinates(HexAxialCoordinates axial)
         {
             var x = axial.Q;
             var z = axial.R;
@@ -86,7 +86,7 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinatesSextuple GetAllNeighbors(HexOffsetCoordinates offset)
         {
-            var cube = OffsetCoordinatesToCube(offset);
+            var cube = OffsetToCubeCoordinates(offset);
             var allNeighboringCubes = GetAllNeighbors(cube);
 
             var neighbors = new HexOffsetCoordinatesSextuple();
@@ -120,7 +120,7 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinates GetNeighbor(HexOffsetCoordinates offset, Direction direction)
         {
-            var cube = OffsetCoordinatesToCube(offset);
+            var cube = OffsetToCubeCoordinates(offset);
             var neighbor = GetNeighbor(cube, direction);
             var returnOffset = CubeToOffsetCoordinates(neighbor);
 
@@ -132,7 +132,7 @@ namespace Zen.Hexagons
             var arraySize = 6 * radius;
             var singleRing = InstantiateArray(arraySize);
 
-            var cube = OffsetCoordinatesToCube(offset);
+            var cube = OffsetToCubeCoordinates(offset);
             var southWestNeighbor = GetNeighboringCube(Direction.SouthWest);
             var scaledCube = southWestNeighbor * radius;
             cube += scaledCube;
@@ -194,8 +194,8 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinates[] GetLine(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
         {
-            var fromCube = OffsetCoordinatesToCube(fromOffset);
-            var toCube = OffsetCoordinatesToCube(toOffset);
+            var fromCube = OffsetToCubeCoordinates(fromOffset);
+            var toCube = OffsetToCubeCoordinates(toOffset);
 
             var hexes = GetLine(fromCube, toCube);
 
@@ -212,8 +212,8 @@ namespace Zen.Hexagons
 
         public int GetDistance(HexOffsetCoordinates fromOffset, HexOffsetCoordinates toOffset)
         {
-            var fromCube = OffsetCoordinatesToCube(fromOffset);
-            var toCube = OffsetCoordinatesToCube(toOffset);
+            var fromCube = OffsetToCubeCoordinates(fromOffset);
+            var toCube = OffsetToCubeCoordinates(toOffset);
 
             var distance = GetDistance(fromCube, toCube);
 
@@ -224,7 +224,7 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinates FromPixelToOffsetCoordinates(int x, int y)
         {
-            var cube = FromPixelToCube(x - (int)Offset.X, y - (int)Offset.Y);
+            var cube = FromPixelToCubeCoordinates(x - (int)Offset.X, y - (int)Offset.Y);
             var offset = CubeToOffsetCoordinates(cube);
 
             return offset;
@@ -232,7 +232,7 @@ namespace Zen.Hexagons
 
         public HexOffsetCoordinates RoundOffsetCoordinates(float x, float y)
         {
-            var cube = RoundCube(x, -x - y, y);
+            var cube = RoundCubeCoordinates(x, -x - y, y);
             var offsetCoordinates = CubeToOffsetCoordinates(cube);
 
             return offsetCoordinates;
@@ -272,7 +272,7 @@ namespace Zen.Hexagons
             {
                 var t = 1.0f / distance * i;
                 var lerp = Lerp(fromCube, toCube, t);
-                var hex = RoundCube(lerp.X, lerp.Y, lerp.Z);
+                var hex = RoundCubeCoordinates(lerp.X, lerp.Y, lerp.Z);
                 results[i] = hex;
             }
 
@@ -292,23 +292,23 @@ namespace Zen.Hexagons
             return distance1;
         }
 
-        public HexCubeCoordinates FromPixelToCube(int x, int y)
+        public HexCubeCoordinates FromPixelToCubeCoordinates(int x, int y)
         {
-            var axial = FromPixelToAxial(x, y);
-            var cube = AxialToCube(axial);
+            var axial = FromPixelToAxialCoordinates(x, y);
+            var cube = AxialToCubeCoordinates(axial);
 
             return cube;
         }
 
-        public Point2F FromCubeToPixel(HexCubeCoordinates cube)
+        public Point2F FromCubeCoordinatesToPixel(HexCubeCoordinates cube)
         {
-            var axial = CubeToAxial(cube);
-            var pixel = FromAxialToPixel(axial);
+            var axial = CubeToAxialCoordinates(cube);
+            var pixel = FromAxialCoordinatesToPixel(axial);
 
             return pixel;
         }
 
-        public HexCubeCoordinates RoundCube(float x, float y, float z)
+        public HexCubeCoordinates RoundCubeCoordinates(float x, float y, float z)
         {
             var rx = (int)Math.Round(x);
             var ry = (int)Math.Round(y);
@@ -337,14 +337,14 @@ namespace Zen.Hexagons
             return cube;
         }
 
-        public abstract HexAxialCoordinates FromPixelToAxial(int x, int y);
+        public abstract HexAxialCoordinates FromPixelToAxialCoordinates(int x, int y);
 
-        public abstract Point2F FromAxialToPixel(HexAxialCoordinates axial);
+        public abstract Point2F FromAxialCoordinatesToPixel(HexAxialCoordinates axial);
 
-        public HexAxialCoordinates RoundAxial(float q, float r)
+        public HexAxialCoordinates RoundAxialCoordinates(float q, float r)
         {
-            var cube = RoundCube(q, -q - r, r);
-            var axial = CubeToAxial(cube);
+            var cube = RoundCubeCoordinates(q, -q - r, r);
+            var axial = CubeToAxialCoordinates(cube);
 
             return axial;
         }
