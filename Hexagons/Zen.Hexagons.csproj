@@ -6,6 +6,7 @@
     <RootNamespace>Zen.Hexagons</RootNamespace>
     <Authors>Greg Moller</Authors>
     <Version>1.0.5</Version>
+    <Company>Zen</Company>
   </PropertyGroup>
 
 </Project>
