@@ -5,8 +5,9 @@
     <AssemblyName>Zen.Hexagons</AssemblyName>
     <RootNamespace>Zen.Hexagons</RootNamespace>
     <Authors>Greg Moller</Authors>
-    <Version>1.0.5</Version>
+    <Version>1.0.7</Version>
     <Company>Zen</Company>
+    <Description>Hexagon routines for use in for software that uses hexagon grids.</Description>
   </PropertyGroup>
 
 </Project>
