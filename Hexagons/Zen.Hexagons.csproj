@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Zen.Hexagons</AssemblyName>
     <RootNamespace>Zen.Hexagons</RootNamespace>
-    <Authors>Greg Moller</Authors>
     <Version>1.0.7</Version>
+    <Authors>Greg Moller</Authors>
     <Company>Zen</Company>
     <Description>Hexagon routines for use in for software that uses hexagon grids.</Description>
   </PropertyGroup>
