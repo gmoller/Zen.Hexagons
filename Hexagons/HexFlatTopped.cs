@@ -127,12 +127,12 @@ namespace Zen.Hexagons
         {
             var corners = new Point2FSextuple
             {
-                Point0 = GetCorner(Direction.NorthEast),
-                Point1 = GetCorner(Direction.East),
-                Point2 = GetCorner(Direction.SouthEast),
-                Point3 = GetCorner(Direction.SouthWest),
-                Point4 = GetCorner(Direction.West),
-                Point5 = GetCorner(Direction.NorthWest)
+                Point0 = GetCorner(0.5f, -0.86602540378f, Size), // NorthEast
+                Point1 = GetCorner(1.0f, 0.0f, Size), // East
+                Point2 = GetCorner(0.5f, 0.86602540378f, Size), // SouthEast
+                Point3 = GetCorner(-0.5f, 0.86602540378f, Size), // SouthWest
+                Point4 = GetCorner(-1.0f, 0.0f, Size), // West
+                Point5 = GetCorner(-0.5f, -0.86602540378f, Size) // NorthWest
             };
 
             return corners;
@@ -175,37 +175,6 @@ namespace Zen.Hexagons
             var worldHeightInPixels = worldMapRows * SideToSide + Apothem;
 
             return (int)worldHeightInPixels;
-        }
-
-        protected override float GetDegreesForHexCorner(Direction direction)
-        {
-            float degrees;
-
-            switch (direction)
-            {
-                case Direction.NorthEast:
-                    degrees = 300;
-                    break;
-                case Direction.East:
-                    degrees = 0;
-                    break;
-                case Direction.SouthEast:
-                    degrees = 60;
-                    break;
-                case Direction.SouthWest:
-                    degrees = 120;
-                    break;
-                case Direction.West:
-                    degrees = 180;
-                    break;
-                case Direction.NorthWest:
-                    degrees = 240;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-            }
-
-            return degrees;
         }
 
         protected override Direction[] GetRingDirections()

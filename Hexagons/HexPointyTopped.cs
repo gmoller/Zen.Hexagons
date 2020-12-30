@@ -127,12 +127,12 @@ namespace Zen.Hexagons
         {
             var corners = new Point2FSextuple
             {
-                Point0 = GetCorner(Direction.North),
-                Point1 = GetCorner(Direction.NorthEast),
-                Point2 = GetCorner(Direction.SouthEast),
-                Point3 = GetCorner(Direction.South),
-                Point4 = GetCorner(Direction.SouthWest),
-                Point5 = GetCorner(Direction.NorthWest)
+                Point0 = GetCorner(0.0f, -1.0f, Size), // North
+                Point1 = GetCorner(0.86602540378f, -0.5f, Size), // NorthEast
+                Point2 = GetCorner(0.86602540378f, 0.5f, Size), // SouthEast
+                Point3 = GetCorner(0.0f, 1.0f, Size), // South
+                Point4 = GetCorner(-0.86602540378f, 0.5f, Size), // SouthWest
+                Point5 = GetCorner(-0.86602540378f, -0.5f, Size) // NorthWest
             };
 
             return corners;
@@ -175,37 +175,6 @@ namespace Zen.Hexagons
             var worldHeightInPixels = worldMapRows * Constants.OneHalf * VertexToVertex + worldMapRows * Constants.OneHalf * SideLength + VertexToVertex * Constants.OneQuarter;
 
             return (int)worldHeightInPixels;
-        }
-
-        protected override float GetDegreesForHexCorner(Direction direction)
-        {
-            float degrees;
-
-            switch (direction)
-            {
-                case Direction.North:
-                    degrees = 270;
-                    break;
-                case Direction.NorthEast:
-                    degrees = 330;
-                    break;
-                case Direction.SouthEast:
-                    degrees = 30;
-                    break;
-                case Direction.South:
-                    degrees = 90;
-                    break;
-                case Direction.SouthWest:
-                    degrees = 150;
-                    break;
-                case Direction.NorthWest:
-                    degrees = 210;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-            }
-
-            return degrees;
         }
 
         protected override Direction[] GetRingDirections()

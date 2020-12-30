@@ -351,15 +351,13 @@ namespace Zen.Hexagons
 
         protected abstract HexCubeCoordinates GetNeighboringCube(Direction direction);
 
-        protected Point2F GetCorner(Direction direction)
+        protected Point2F GetCorner(float cos, float sin, float size)
         {
-            var degrees = GetDegreesForHexCorner(direction);
-            var radians = degrees.ToRadians();
-            var p = new Point2F((float)(Size * Math.Cos(radians)), (float)(Size * Math.Sin(radians)));
+            var x = size * cos;
+            var y = size * sin;
+            var p = new Point2F((float)x, (float)y);
 
             return p;
         }
-
-        protected abstract float GetDegreesForHexCorner(Direction direction);
     }
 }
